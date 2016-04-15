@@ -3,12 +3,14 @@
 
 var MarkdownIt = require('markdown-it');
 var hljs = require('highlight.js');
-var server = require('http').createServer(httpHandler),
-    exec = require('child_process').exec,
-    io = require('socket.io').listen(server),
-    send = require('send'),
-    server,
-    socket;
+var server = require('http').createServer(httpHandler);
+var exec = require('child_process').exec;
+var io = require('socket.io').listen(server);
+var send = require('send');
+var FILE_RESERVED = require('./file-reserved');
+var server;
+var socket;
+var finalBody;
 
 server.listen(8090);
 
@@ -37,21 +39,30 @@ function writeMarkdown(input, output) {
     }
   });
   input.on('end', function() {
+    finalBody = body;
     output.emit('newContent', md.render(body));
   });
+}
+
+function requestMarkdown(output) {
+  if(!finalBody) {
+    writeMarkdown(process.stdin, output);
+    process.stdin.resume();
+    return;
+  }
+
+  output.emit('newContent', md.render(finalBody));
 }
 
 function httpHandler(req, res) {
   switch(req.method)
   {
     case 'GET':
-      // Example: /my-repo/raw/master/sub-dir/some.png
-      var githubUrl = req.url.match(/\/[^\/]+\/raw\/[^\/]+\/(.+)/);
-      if (githubUrl) {
-         // Serve the file out of the current working directory
-        send(req, githubUrl[1])
-         .root(process.cwd())
-         .pipe(res);
+      // assets file...
+      if(req.url !== '/' && req.url !== '' && FILE_RESERVED.indexOf(req.url) < 0) {
+        send(req, req.url)
+          .root(process.cwd())
+          .pipe(res);
         return;
       }
 
@@ -62,12 +73,12 @@ function httpHandler(req, res) {
       break;
 
     // case 'HEAD':
-      // res.writeHead(200);
-      // res.end();
-      // exec('open -g http://localhost:8090', function(error, stdout, stderr){
-        // http.request({port: 8090})
-      // });
-      // break;
+    //   res.writeHead(200);
+    //   res.end();
+    //   exec('open -g http://localhost:8090', function(error, stdout, stderr){
+    //     http.request({port: 8090})
+    //   });
+    //   break;
 
     case 'DELETE':
       socket.emit('die');
@@ -88,8 +99,7 @@ io.set('log level', 1);
 io.sockets.on('connection', function(sock){
   socket = sock;
   process.stdout.write('connection established!');
-  writeMarkdown(process.stdin, socket);
-  process.stdin.resume();
+  requestMarkdown(socket);
 });
 
 
