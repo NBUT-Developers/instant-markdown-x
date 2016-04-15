@@ -53,6 +53,7 @@ function httpHandler(req, resp) {
             return send(req, req.url).root(__dirname).pipe(resp);
 
         case "DELETE":
+            io.emit("die");
             io.close();
             process.exit(0);
             break;
