@@ -1,6 +1,6 @@
 # !nstant-markdown-x
 
-**instant-markdown-x a fork for instant-markdown-d.**
+**instant-markdown-x a fork for instant-markdown-d. For VIM: https://github.com/NBUT-Developers/extra-instant-markdown.**
 
 > instant-markdown-d is a small Node.js server that enables instant compilation and previewing of Markup files. A plugin can easily be written for any text editor to interface with it. One currently exists for VIm: https://github.com/suan/vim-instant-markdown
 
@@ -15,6 +15,6 @@ REST API
 | Refresh Markdown on page | PUT         | http://localhost:\<port\> | \<New Markdown file contents\> |
 | Close Webpage            | DELETE      | http://localhost:\<port\> |                                |
 
-By default, `<port>` is 8090
+By default, `<port>` is 18474.
 
 ![X](x.jpg)
