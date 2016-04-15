@@ -1,6 +1,6 @@
 # !nstant-markdown-x
 
-**instant-markdown-x a fork for instant-markdown-d. For VIM: https://github.com/NBUT-Developers/extra-instant-markdown.**
+**instant-markdown-x is a fork for instant-markdown-d. For VIM: https://github.com/NBUT-Developers/extra-instant-markdown.**
 
 > instant-markdown-d is a small Node.js server that enables instant compilation and previewing of Markup files. A plugin can easily be written for any text editor to interface with it. One currently exists for VIm: https://github.com/suan/vim-instant-markdown
 
