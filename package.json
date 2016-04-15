@@ -5,8 +5,7 @@
   ],
   "name": "instant-markdown-x",
   "description": "Instantly-updating Markdown Server.",
-  "version": "0.2.0",
-  "engine": "node",
+  "version": "1.0.0",
   "main": "instant-markdown-x",
   "preferGlobal": "true",
   "bin": {
