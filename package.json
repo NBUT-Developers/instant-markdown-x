@@ -5,11 +5,11 @@
   ],
   "name": "instant-markdown-x",
   "description": "Instantly-updating Markdown Server.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "instant-markdown-x",
   "preferGlobal": "true",
   "bin": {
-    "instant-markdown-x": "./instant-markdown-x"
+    "instant-markdown-x": "./instant_markdown_x"
   },
   "dependencies": {
     "highlight.js": "^9.3.0",
