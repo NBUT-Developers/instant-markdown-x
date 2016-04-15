@@ -10,7 +10,7 @@
   "main": "instant-markdown-x",
   "preferGlobal": "true",
   "bin": {
-    "instant-markdown-d": "./instant-markdown-x"
+    "instant-markdown-x": "./instant-markdown-x"
   },
   "dependencies": {
     "highlight.js": "^9.3.0",
